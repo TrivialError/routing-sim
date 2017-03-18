@@ -35,7 +35,7 @@ class Arena:
                        if intersection.depot]
 
         edges = [road.ends for road in self.roads]
-        nodes = self.intersections + self.pickups + self.agents
+        nodes = self.intersections + self.pickups + self.agents + self.depots
 
         self.graph.add_nodes_from(nodes)
         self.graph.add_edges_from(edges)

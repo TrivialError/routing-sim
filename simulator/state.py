@@ -1,13 +1,16 @@
 from builder.arena import *
 from simulator.road import *
 from simulator.pickup import *
+import numpy.random as rand
+
+PICKUP_SIZE_AVG = 2
 
 
 class State:
 
     # problem_state is a ProblemState object with the map information
     # sim_interval is the amount of simulated time between each generated state in seconds
-    # pickup_rate is the rate at which new pickups are generated per second
+    # pickup_rate is the probability that a new pickup will be generated each second.
     # new_pickup indicates whether a new pickup has been generated in the last state update,
     #   and should be set back to False once addressed
     # time is the amount of simulated time that has passed in seconds
@@ -21,13 +24,18 @@ class State:
         self.new_pickup = False
 
     # Processes the new state after one sim_interval
-    def next_state(self):
+    def next_state(self, gen_pickups=True):
 
         self.move_agents()
 
-        self.gen_pickups()
+        if gen_pickups:
+            self.gen_pickups()
 
-        self.get_targets()
+        if self.new_pickup:
+            self.get_targets()
+            self.new_pickup = False
+
+        self.time += self.sim_interval
 
         return self.problem_state
 
@@ -126,7 +134,27 @@ class State:
                 agent.position = (current_road, progress)
 
     def gen_pickups(self):
-        pass
+
+        gen_average = self.pickup_rate * self.sim_interval
+        num_pickups = rand.poisson(gen_average)
+        for i in range(num_pickups):
+            pickup_size = rand.poisson(PICKUP_SIZE_AVG)
+            roads = self.problem_state.roads
+            length_sum = sum(map(lambda x: x.length, roads))
+            road_prob = list(map(lambda x: x.length / length_sum, roads))
+
+            pickup_road = rand.choice(roads, p=road_prob)
+            pickup_road.contains_pickup = True
+
+            progress = rand.uniform(0, pickup_road.length)
+            pickup_position = (pickup_road, progress)
+            pickup_pri = rand.uniform(0, 5)
+
+            new_pickup = Pickup(pickup_position, pickup_pri, pickup_size)
+
+            self.problem_state.pickups.append(new_pickup)
+            self.new_pickup = True
 
     def get_targets(self):
+        # TODO
         pass

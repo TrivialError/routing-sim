@@ -29,7 +29,7 @@ arena = Arena(problem_state)
 # arena.build()
 # arena.draw()
 
-state = State(problem_state, 1, 1, 0)
+state = State(problem_state, 0.01, 1, 0)
 
 for i in range(500):
     problem_state = state.next_state()
