@@ -1,6 +1,7 @@
 from builder.arena import *
 from simulator.road import *
 from simulator.pickup import *
+from generator.generator import *
 import numpy.random as rand
 
 PICKUP_SIZE_AVG = 2
@@ -150,11 +151,12 @@ class State:
             pickup_position = (pickup_road, progress)
             pickup_pri = rand.uniform(0, 5)
 
-            new_pickup = Pickup(pickup_position, pickup_pri, pickup_size)
+            new_pickup = Pickup(str(Pickup.number), pickup_position, pickup_pri, pickup_size)
 
             self.problem_state.pickups.append(new_pickup)
             self.new_pickup = True
 
     def get_targets(self):
-        # TODO
-        pass
+        generator = Generator(self.problem_state)
+
+        generator.generate_problem_instance()

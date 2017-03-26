@@ -14,3 +14,9 @@ class Agent:
         self.speed = speed
         self.route = route
         self.agent_type = agent_type
+
+    def __str__(self):
+        return self.name
+
+    def __repr__(self):
+        return self.name

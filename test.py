@@ -1,6 +1,6 @@
 from simulator.road import Road
 from simulator.intersection import Intersection
 
-i = Intersection(None, None)
+i = Intersection((4, 5), None)
 
-i.hello
+print({i: i})

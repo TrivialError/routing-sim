@@ -5,3 +5,9 @@ class Intersection:
 
         self.location = location
         self.depot = depot
+
+    def __str__(self):
+        return str(self.location)
+
+    def __repr__(self):
+        return str(self.location)
