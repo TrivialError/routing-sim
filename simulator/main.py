@@ -18,10 +18,10 @@ r5 = Road((i4, i2), 700)
 r6 = Road((i5, i1), 1000)
 r7 = Road((d1, i3), 600)
 
-p1 = Pickup("Pickup 1", (r1, 0), 1, 1)
-p2 = Pickup("Pickup 2", (r2, 200), 1, 1)
+p1 = Pickup("Pickup 0", (r1, 0), 1, 1)
+p2 = Pickup("Pickup 1", (r2, 200), 1, 1)
 
-a1 = Agent("Agent 1", 'g', (r3, 250), 10000, 10000, 10, 0, 400, [i1, p1, i2, p2, i3, d1], None)
+a1 = Agent("Agent 0", 'g', (r3, 250), 10000, 10000, 10, 0, 400, [i1, p1, i2, p2, i3, d1], None)
 
 problem_state = ProblemState([i1, i2, i3, i4, i5, d1], [r1, r2, r3, r4, r5, r6, r7], [a1], [p1, p2])
 

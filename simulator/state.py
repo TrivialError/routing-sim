@@ -147,11 +147,11 @@ class State:
             pickup_road = rand.choice(roads, p=road_prob)
             pickup_road.contains_pickup = True
 
-            progress = rand.uniform(0, pickup_road.length)
+            progress = rand.randint(0, pickup_road.length)
             pickup_position = (pickup_road, progress)
-            pickup_pri = rand.uniform(0, 5)
+            pickup_pri = rand.randint(0, 5)
 
-            new_pickup = Pickup(str(Pickup.number), pickup_position, pickup_pri, pickup_size)
+            new_pickup = Pickup("Pickup " + str(Pickup.number), pickup_position, pickup_pri, pickup_size)
 
             self.problem_state.pickups.append(new_pickup)
             self.new_pickup = True
@@ -160,3 +160,5 @@ class State:
         generator = Generator(self.problem_state)
 
         generator.generate_problem_instance()
+
+        generator.get_targets()

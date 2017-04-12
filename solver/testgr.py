@@ -18,3 +18,7 @@ for v in m.getVars():
     print(v.varName, v.x)
 
 print('Obj:', m.objVal)
+
+
+def test_solve(problem_instance_graph, problem_state):
+    pass

@@ -1,6 +1,14 @@
-from simulator.road import Road
-from simulator.intersection import Intersection
+from gurobipy import *
 
-i = Intersection((4, 5), None)
+m = Model("Quad Test")
 
-print({i: i})
+x = m.addVar(vtype=GRB.INTEGER)
+y = m.addVar(0, vtype=GRB.INTEGER)
+
+m.setObjective(x*x + y, GRB.MINIMIZE)
+
+m.addConstr()
+
+m.optimize()
+
+print(x.x)
